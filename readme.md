@@ -7,6 +7,4 @@ The first step is creating an image using C\#
 
 **Stage 1:**  
 A ppm image was generated using C\#   
-![][image1]
-
-[image1]: images/stage1.ppm
+![image1]: images/stage1.ppm
