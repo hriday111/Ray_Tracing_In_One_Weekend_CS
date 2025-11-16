@@ -74,9 +74,9 @@ public class Vec3
         return $"({e[0]}, {e[1]}, {e[2]})";
     }
 
-    public double dot(Vec3 v1, Vec3 v2)
+    public double dot( Vec3 v2)
     {
-        return v1[0]*v2[0]+ v1[1]*v2[1]+ v1[2]*v2[2];
+        return this[0]*v2[0]+ this[1]*v2[1]+ this[2]*v2[2];
     }
 
     public Vec3 cross(Vec3 v1, Vec3 v2)

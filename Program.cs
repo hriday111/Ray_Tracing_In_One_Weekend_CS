@@ -5,13 +5,9 @@ using Color = Vec3;
 using Point3 = Vec3;
 public static class Program
 {
-    public static Color RayColor(in Ray r)
-    {
-       Vec3 unit_direction= r.Direction.unit_vector();
-       //ColorUtils.WriteColor(Console.Out, unit_direction);
-       var a = 0.5*(unit_direction[1]+1.0);
-       return (1.0-a)*new Color(1.0,1.0,1.0)+ a*new Color(0.5,0.7,1);
-    }
+
+    
+    
     public static void Main(string[] args)
     {
         //Image 
@@ -50,7 +46,7 @@ public static class Program
                 var pixel_center = pixel00_loc + (i * pixel_delta_u) + (j* pixel_delta_v);
                 var ray_direction = pixel_center - camera_center;
                 var r = new Ray(camera_center, ray_direction);
-                var pixel_color = RayColor(r);
+                var pixel_color = r.RayColor();
                 ColorUtils.WriteColor(Console.Out, pixel_color);
             }
         }

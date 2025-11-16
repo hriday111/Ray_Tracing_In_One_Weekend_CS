@@ -31,3 +31,9 @@ Also and At() method was implemented to to find the the vector at t for the foll
 ### Stage 4.2
 This substage focused on create a camera object and defining the viewport. 
 Then firing the rays and creating a background for our scene
+
+
+## Stage 5
+### Stage 5.1 & 5.2
+
+Here we make a sphere in our scene. And using some math determine if our ray hits the sphere. if it does then it displays a differnt color than the background. In this case red. 
