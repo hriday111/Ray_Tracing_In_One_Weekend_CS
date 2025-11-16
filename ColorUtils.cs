@@ -4,7 +4,7 @@ using System.Numerics;
 public static class ColorUtils
 {
     
-    public static void WriteColor(TextWriter outStream, vec3 pixel_color)
+    public static void WriteColor(TextWriter outStream, Vec3 pixel_color)
     {
         var r = pixel_color[0];
         var g = pixel_color[1];

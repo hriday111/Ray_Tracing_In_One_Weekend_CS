@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using System.Numerics;
-using Color = vec3;
+using Color = Vec3;
 public static class Program
 {
     public static void Main(string[] args)
