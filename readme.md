@@ -16,17 +16,18 @@ C sharp's built in System.Numerics provides a thorougly tested Vector3 implement
 
 I also renamed the System.Numerics.Vector3 as Color using the ``using'' keyword.
 
-## Update to stage 3:
+## Update to Stage 3:
 Since the build in Vector3 uses float, meanwhile the book uses double (likely due to its higher precision), I implemented a custom class vec3 and impleneted all the basic operators and vec3 functions.
 
 ## Stage 4:
 Here I will implement Rays, a simple camera and Background
 
-### Stage4.1
+### Stage 4.1
 
 A ray class was implemented with basic read only properties for origin and direction.
 
 Also and At() method was implemented to to find the the vector at t for the following function P(t)=Origin + t* Direction
 
 ### Stage 4.2
-TODO: sending rays into the scene
+This substage focused on create a camera object and defining the viewport. 
+Then firing the rays and creating a background for our scene

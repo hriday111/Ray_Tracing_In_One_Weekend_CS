@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.CompilerServices;
 using System.Dynamic;
 using System.Numerics;
 using Point3 = Vec3;
@@ -84,9 +85,11 @@ public class Vec3
                         v1[2] * v2[0] - v1[0] * v2[2],
                         v1[0] * v2[1] - v1[1] * v2[0]);
     }
-    public Vec3 unit_vector(Vec3 v)
+
+    //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public Vec3 unit_vector()
     {
-        return v/v.length();
+        return this/this.length();
     }
 
 }
