@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using System.Numerics;
-using Color = System.Numerics.Vector3;
+using Color = vec3;
 public static class Program
 {
     public static void Main(string[] args)
@@ -13,7 +13,7 @@ public static class Program
             Console.Error.Write("\rLines remaining: "+(image_height-j)+" ");
             for(int i=0; i<image_width; i++)
             {
-                var pixel_color = new Color(((float)i)/(image_width-1), ((float)j)/(image_height-1), 0);
+                var pixel_color = new Color(((double)i)/(image_width-1), ((double)j)/(image_height-1), 0);
                 ColorUtils.WriteColor(Console.Out, pixel_color);
             }
         }
