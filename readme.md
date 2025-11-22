@@ -37,3 +37,8 @@ Then firing the rays and creating a background for our scene
 ### Stage 5.1 & 5.2
 
 Here we make a sphere in our scene. And using some math determine if our ray hits the sphere. if it does then it displays a differnt color than the background. In this case red. 
+
+## Stage 6
+### Stage 6.1
+
+In the previous stage we only checked if the ray hit the sphere or not, now the method bool hit_sphere was modified to return a double value of the distance from the origin to the hit-point
