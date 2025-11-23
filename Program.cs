@@ -15,7 +15,12 @@ public static class Program
         int image_width = 400;
         int image_height = (int)(image_width/aspect_ratio);
         image_height = image_height<1 ? 1: image_height;
-
+        
+        //World
+        var world = new HittableList();
+        
+        world.Add(new Sphere(new Point3(0, -100.5, -1), 100));
+        world.Add(new Sphere(new Point3(0, 0, -1), 0.5));
         //Camera
         var focal_length = 1.0;
         var viewport_height = 2.0;
@@ -46,7 +51,7 @@ public static class Program
                 var pixel_center = pixel00_loc + (i * pixel_delta_u) + (j* pixel_delta_v);
                 var ray_direction = pixel_center - camera_center;
                 var r = new Ray(camera_center, ray_direction);
-                var pixel_color = r.RayColor();
+                var pixel_color = r.RayColor(world);
                 ColorUtils.WriteColor(Console.Out, pixel_color);
             }
         }

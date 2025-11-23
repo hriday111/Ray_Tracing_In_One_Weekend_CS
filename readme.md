@@ -42,3 +42,15 @@ Here we make a sphere in our scene. And using some math determine if our ray hit
 ### Stage 6.1
 
 In the previous stage we only checked if the ray hit the sphere or not, now the method bool hit_sphere was modified to return a double value of the distance from the origin to the hit-point
+
+
+### Stage 6.2
+This was just slightly optimising the hit_sphere method
+
+### Stage 6.3-6.8
+The aim of this stage was to greatly generalize the code. To create an abstract interface IHittable and then derive from it a Sphere and  a HittableList which is a collection of Hittable objects. 
+
+Helper class was added for Mathematical functions and an Interval struct was implemented to improve readability, maintainability and scalability of the project. 
+
+## Stage 7
+TODO put the camera into its own abstract class
