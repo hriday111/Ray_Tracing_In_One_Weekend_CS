@@ -53,4 +53,6 @@ The aim of this stage was to greatly generalize the code. To create an abstract 
 Helper class was added for Mathematical functions and an Interval struct was implemented to improve readability, maintainability and scalability of the project. 
 
 ## Stage 7
-TODO put the camera into its own abstract class
+Camera was put into its own class and the main method in program.cs was just used for world building.
+
+Tried adding two sphere of different radii, although the spheres don't look too much like spheres. 
