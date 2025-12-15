@@ -25,6 +25,13 @@ public readonly struct Interval
     {
         return Min < x && x < Max;
     }
+
+    public double Clamp(double x)
+    {
+        if(x<Min) return Min;
+        if(x>Max) return Max;
+        return x;
+    }
     public double Size()
     {
         return Max - Min;

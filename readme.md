@@ -55,4 +55,8 @@ Helper class was added for Mathematical functions and an Interval struct was imp
 ## Stage 7
 Camera was put into its own class and the main method in program.cs was just used for world building.
 
-Tried adding two sphere of different radii, although the spheres don't look too much like spheres. 
+
+## Stage 8
+Anti Aliasing was performed at this stage to remove jagged lines.
+
+## Stage 9

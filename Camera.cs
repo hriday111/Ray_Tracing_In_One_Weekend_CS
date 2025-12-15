@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Drawing;
 using Color = Vec3;
 using Point3 = Vec3;
@@ -6,7 +7,9 @@ public class Camera
 
     public double aspect_ratio=1.0;
     public int image_width = 100;
+    public  int samples_per_pixel = 10;
     int image_height;
+    double pixel_samples_scale;
     Point3 camera_center = new Point3();
     Point3 pixel00_loc = new Point3();
     Vec3 pixel_delta_u = new Vec3();
@@ -21,21 +24,39 @@ public class Camera
             Console.Error.Write("\rLines remaining: "+(image_height-j)+" ");
             for(int i=0; i<image_width; i++)
             {
-                var pixel_center = pixel00_loc + (i * pixel_delta_u) + (j* pixel_delta_v);
-                var ray_direction = pixel_center - camera_center;
-                var r = new Ray(camera_center, ray_direction);
-                var pixel_color = r.RayColor(world);
-                ColorUtils.WriteColor(Console.Out, pixel_color);
+                Color pixel_color = new Color(0,0,0);
+                for(int sample = 0; sample < samples_per_pixel; sample++)
+                {
+                    var r = get_ray(i,j);
+                    pixel_color+=RayColor(r, world);
+                }
+                ColorUtils.WriteColor(Console.Out, pixel_samples_scale*pixel_color);
             }
         }
 
         Console.Error.Write("\rDone.                         \n");
     }
 
+    Vec3 sample_square()
+    {
+        return new Vec3(RTHelpers.RandomDouble()-0.5, RTHelpers.RandomDouble()-0.5,0);
+    }
+    Ray get_ray(int i, int j)
+    {
+        var offset = sample_square();
+        var pixel_sample = pixel00_loc 
+                            + ((i+offset[0]) * pixel_delta_u)
+                            + ((j+offset[1]) * pixel_delta_v);
+        var RayOrigin = camera_center;
+        var RayDirection = pixel_sample - RayOrigin;
+
+        return new Ray(RayOrigin, RayDirection);
+    }
     void initialize()
     {
         image_height=(int)(image_width/aspect_ratio);
         image_height = (image_height<1)? 1: image_height;
+        pixel_samples_scale = 1.0 / samples_per_pixel;
         camera_center = new Point3(0,0,0);
         var focal_length = 1.0;
         var viewport_height = 2.0;
