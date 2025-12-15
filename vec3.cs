@@ -125,9 +125,18 @@ public class Vec3
         else {return -OnUnitSphere;}
     }
 
-    public Vec3 reflect(Vec3 v2)
+    public Vec3 reflect(Vec3 n)
     {
-        return this - 2*this.dot(v2)*v2;
+        return this - 2*this.dot(n)*n;
+    }
+
+    public Vec3 refract(Vec3 n, double etai_over_etat)
+    {
+        var cos_theta = Math.Min(-this.dot(n), 1.0);
+
+        Vec3 r_out_prep = etai_over_etat * (this + cos_theta*n);
+        Vec3 r_out_parallel = -Math.Sqrt(Math.Abs(1-r_out_prep.length_squared()))*n;
+        return r_out_prep + r_out_parallel;
     }
 
 }

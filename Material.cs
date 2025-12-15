@@ -31,14 +31,54 @@ public class Lambertian : Material
 public class Metal: Material
 {
     private Color albedo= new Color();
-
-    public Metal(in Color a) { albedo = a;}
+    private double fuzz;
+    public Metal(in Color a, double fuzz) { albedo = a; this.fuzz = fuzz;}
 
     public override bool scatter(in Ray r_in, in HitRecord rec, out Color attenuation, out Ray scattered)
     {
         Vec3 reflected = r_in.Direction.reflect(rec.Normal);
+        reflected = reflected.unit_vector() + (fuzz* albedo.RandomUnitVector());
         attenuation = albedo;
         scattered = new Ray(rec.P, reflected);
-        return true;
+        return scattered.Direction.dot(rec.Normal)>0;
     }
+}
+
+
+public class Dielectric: Material
+{
+    double refraction_index;
+    static double reflectance(double cos, double ri)
+    {
+        var r0 = (1-ri)/(1+ri);
+        r0=r0*r0;
+        return r0 + (1-r0)*Math.Pow((1-cos), 5);
+    }
+
+    
+    public Dielectric(double ref_idx) { refraction_index = ref_idx;}
+    public override bool scatter(in Ray r_in, in HitRecord rec, out Color attenuation, out Ray scattered)
+    {
+        attenuation = new Color(1,1,1);
+        double ri = rec.FrontFace? (1/refraction_index) : refraction_index;
+
+        Vec3 unit_dir = r_in.Direction.unit_vector();
+        double cos_theta = Math.Min(-unit_dir.dot(rec.Normal), 1.0);
+        double sin_theta = Math.Sqrt(1- cos_theta*cos_theta);
+        Vec3 direction = new Vec3();
+        if(ri*sin_theta>1.0 || reflectance(cos_theta, ri)>RTHelpers.RandomDouble())
+        
+        { 
+            direction = unit_dir.reflect(rec.Normal);
+        }
+        else
+        {
+            direction = unit_dir.refract(rec.Normal, ri);
+        }
+        
+
+        scattered = new Ray(rec.P, direction);
+        return true;    
+    }
+
 }

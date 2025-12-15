@@ -66,3 +66,7 @@ Check out `images/stage9`
 This stage was all about creating an abstract material class. There we created the two derived classes, a Lambertian which is a matte surface and a Metal which reflects rays. 
 
 Multiple sphere were added to check out the functionality. See image `images/stage10`
+
+## Stage 11
+This stage focused on adding dielectrics, such as glass, water and air effect. The image `image/stage11-3` shows the effect with a glass and `image/stage11-4` shows a hollowed glass effect. 
+
