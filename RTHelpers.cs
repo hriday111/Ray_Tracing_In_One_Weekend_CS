@@ -18,7 +18,10 @@ public static class RTHelpers
         
     public static double RandomDouble()
     {
-            // Use the instance from the current thread's local storage
+        // Use the instance from the current thread's local storage
+        //return _localRandom.Value.NextDouble();
+        if (_localRandom.Value == null)
+            throw new InvalidOperationException("Random instance is not initialized.");
         return _localRandom.Value.NextDouble();
     }
 

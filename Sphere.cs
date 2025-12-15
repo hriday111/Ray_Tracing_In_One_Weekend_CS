@@ -6,8 +6,11 @@ public class Sphere: IHittable
 {
     private  Point3 center {get;}
     private  double radius {get;}
-    public Sphere(Point3 center, double radius)
-    {
+
+    private Material mat;
+    public Sphere(Point3 center, double radius, Material mat)
+    {   
+        this.mat = mat;
         this.center = center;
         this.radius = Math.Max(0, radius);
     }
@@ -36,7 +39,7 @@ public class Sphere: IHittable
         rec.P = r.At(rec.T);
         Vec3 outward_normal = (rec.P - center) /radius;
         rec.SetFaceNormal(in r, in outward_normal);
-
+        rec.mat = mat;
         return true;
     }
 

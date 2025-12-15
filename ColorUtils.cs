@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Numerics;
 
@@ -6,9 +7,9 @@ public static class ColorUtils
     
     public static void WriteColor(TextWriter outStream, Vec3 pixel_color)
     {
-        var r = pixel_color[0];
-        var g = pixel_color[1];
-        var b = pixel_color[2];
+        var r = linear_to_gamma(pixel_color[0]);
+        var g = linear_to_gamma(pixel_color[1]);
+        var b = linear_to_gamma(pixel_color[2]);
 
         Interval intensity = new Interval(0.000,0.999);
         int rbyte = (int) (256*intensity.Clamp(r)); // the 255.999 is used instead of 
@@ -16,6 +17,14 @@ public static class ColorUtils
         int bbyte = (int) (256*intensity.Clamp(b)); 
 
         outStream.WriteLine(rbyte+" "+gbyte+" "+bbyte);
+    }
+
+
+    public static double linear_to_gamma(double linear_component)
+    {
+        if(linear_component>0) return Math.Sqrt(linear_component);
+
+        return 0;
     }
 }
 

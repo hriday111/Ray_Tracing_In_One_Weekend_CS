@@ -92,5 +92,43 @@ public class Vec3
         return this/this.length();
     }
 
+    public static Vec3 Random()
+    {
+        return new Vec3(RTHelpers.RandomDouble(), RTHelpers.RandomDouble(), RTHelpers.RandomDouble());
+    }
+
+    public static Vec3 Random(double min, double max)
+    {
+        return new Vec3(RTHelpers.RandomDouble(min, max), RTHelpers.RandomDouble(min, max), RTHelpers.RandomDouble(min, max));
+    }
+
+    public Vec3 RandomUnitVector()
+    {
+        while(true)
+        {
+            var p = Vec3.Random(-1,1);
+            var lensq = p.length_squared();
+            if(1e-160< lensq && lensq<=1) {return p/Math.Sqrt(lensq);}
+        }
+    }
+    public bool NearZero()
+    {
+        const double s = 1e-8;
+
+        return(Math.Abs(e[0])<s) && (Math.Abs(e[1])<s) && (Math.Abs(e[2])<s);
+    }
+
+    public Vec3 RandomOnHemisphere()
+    {
+        var OnUnitSphere = RandomUnitVector();
+        if(OnUnitSphere.dot(this)>0.0) {return OnUnitSphere;}
+        else {return -OnUnitSphere;}
+    }
+
+    public Vec3 reflect(Vec3 v2)
+    {
+        return this - 2*this.dot(v2)*v2;
+    }
+
 }
 

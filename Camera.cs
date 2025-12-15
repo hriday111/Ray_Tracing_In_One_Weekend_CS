@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using Color = Vec3;
@@ -8,6 +9,7 @@ public class Camera
     public double aspect_ratio=1.0;
     public int image_width = 100;
     public  int samples_per_pixel = 10;
+    public int max_depth =10;
     int image_height;
     double pixel_samples_scale;
     Point3 camera_center = new Point3();
@@ -28,7 +30,7 @@ public class Camera
                 for(int sample = 0; sample < samples_per_pixel; sample++)
                 {
                     var r = get_ray(i,j);
-                    pixel_color+=RayColor(r, world);
+                    pixel_color+=RayColor(r,max_depth, world);
                 }
                 ColorUtils.WriteColor(Console.Out, pixel_samples_scale*pixel_color);
             }
@@ -74,12 +76,21 @@ public class Camera
         pixel00_loc = viewport_upper_left + 0.5* (pixel_delta_u+pixel_delta_v);
 
     }
-    Color RayColor(in Ray r, in IHittable world)
+    Color RayColor(in Ray r, int depth, in IHittable world)
     {
+        if(depth<=0) {return new Color(0,0,0);}
         HitRecord rec;
-        if(world.Hit(r, new Interval(0, RTHelpers.Infinity), out rec))
+
+
+        if(world.Hit(r, new Interval(0.001, RTHelpers.Infinity), out rec))
         {
-            return 0.5 * (rec.Normal+new Color(1,1,1));
+            Ray scattered= new Ray();
+            Color attenuation = new Color(0,0,0);
+            if(rec.mat.scatter(r, rec, out attenuation, out scattered))
+            {
+                return attenuation* RayColor(scattered,depth-1, world);
+            }
+            return new Color(0,0,0);
         }
 
         Vec3 unit_dir= r.Direction.unit_vector();

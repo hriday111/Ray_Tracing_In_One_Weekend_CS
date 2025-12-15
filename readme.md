@@ -60,3 +60,9 @@ Camera was put into its own class and the main method in program.cs was just use
 Anti Aliasing was performed at this stage to remove jagged lines.
 
 ## Stage 9
+Added gamma correction for pixel color which was just squaring the value.
+Check out `images/stage9`
+## Stage 10
+This stage was all about creating an abstract material class. There we created the two derived classes, a Lambertian which is a matte surface and a Metal which reflects rays. 
+
+Multiple sphere were added to check out the functionality. See image `images/stage10`
