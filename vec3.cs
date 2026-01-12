@@ -4,46 +4,47 @@ using System.Runtime.CompilerServices;
 using System.Dynamic;
 using System.Numerics;
 using Point3 = Vec3;
-public class Vec3
+public struct Vec3
 {
     double[] e=new double[3];
+    public double x {get; private set;}
+    public double y {get; private set;}
+    public double z {get; private set;}
     public Vec3()
     {
-        e[0]=0;
-        e[1]=0;
-        e[2]=0;
+        x=0;
+        y=0;
+        z=0;
     }
     
 
     public Vec3(double e0, double e1, double e2)
     {
-        e = new double[] {e0, e1, e2};
+        x = e0;
+        y = e1;
+        z = e2;
     }
-    public double this[int i]
-    {
-        get => e[i];
-        set => e[i] = value;
-    }
+    
 
     
     public static Vec3 operator -(Vec3 v)
     {
-        return new Vec3(-v[0], -v[1], -v[2]);
+        return new Vec3(-v.x, -v.y, -v.z);
     }
 
     public static Vec3 operator +(Vec3 u, Vec3 v)
     {
-        return new Vec3(u[0] + v[0], u[1] + v[1], u[2] + v[2]);
+        return new Vec3(u.x + v.x, u.y + v.y, u.z + v.z);
     }
     
     public static Vec3 operator -(Vec3 u, Vec3 v)
     {
-        return new Vec3(u[0] - v[0], u[1] - v[1], u[2] - v[2]);
+        return new Vec3(u.x - v.x, u.y - v.y, u.z - v.z);
     }
 
     public static Vec3 operator *(Vec3 v, double t)
     {
-        return new Vec3(v[0] * t, v[1] * t, v[2] * t);
+        return new Vec3(v.x * t, v.y * t, v.z * t);
     }
 
     public static Vec3 operator *(double t, Vec3 v)
@@ -53,7 +54,7 @@ public class Vec3
     
     public static Vec3 operator *(Vec3 v1, Vec3 v2)
     {
-        return new Vec3(v1[0]*v2[0], v1[1]*v2[1], v1[2]*v2[2]);
+        return new Vec3(v1.x*v2.x, v1.y*v2.y, v1.z*v2.z);
     }
 
     public static Vec3 operator /(Vec3 v, double t)
@@ -62,7 +63,7 @@ public class Vec3
     }
     public double length_squared()
     {
-        return e[0]*e[0] + e[1]*e[1] + e[2]*e[2];
+        return x*x + y*y + z*z;
     }
     public double length()
     {
@@ -71,19 +72,19 @@ public class Vec3
 
     public override string ToString()
     {
-        return $"({e[0]}, {e[1]}, {e[2]})";
+        return $"({x}, {y}, {z})";
     }
 
     public double dot( Vec3 v2)
     {
-        return this[0]*v2[0]+ this[1]*v2[1]+ this[2]*v2[2];
+        return this.x*v2.x+ this.y*v2.y+ this.z*v2.z;
     }
 
     public Vec3 cross(Vec3 v1, Vec3 v2)
     {
-        return new Vec3(v1[1] * v2[2] - v1[2] * v2[1],
-                        v1[2] * v2[0] - v1[0] * v2[2],
-                        v1[0] * v2[1] - v1[1] * v2[0]);
+        return new Vec3(v1.y * v2.z - v1.z * v2.y,
+                        v1.z * v2.x - v1.x * v2.z,
+                        v1.x * v2.y - v1.y * v2.x);
     }
 
     //[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -115,7 +116,7 @@ public class Vec3
     {
         const double s = 1e-8;
 
-        return(Math.Abs(e[0])<s) && (Math.Abs(e[1])<s) && (Math.Abs(e[2])<s);
+        return(Math.Abs(x)<s) && (Math.Abs(y)<s) && (Math.Abs(z)<s);
     }
 
     public Vec3 RandomOnHemisphere()

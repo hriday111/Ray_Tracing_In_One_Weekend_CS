@@ -7,9 +7,9 @@ public static class ColorUtils
     
     public static void WriteColor(TextWriter outStream, Vec3 pixel_color)
     {
-        var r = linear_to_gamma(pixel_color[0]);
-        var g = linear_to_gamma(pixel_color[1]);
-        var b = linear_to_gamma(pixel_color[2]);
+        var r = linear_to_gamma(pixel_color.x);
+        var g = linear_to_gamma(pixel_color.y);
+        var b = linear_to_gamma(pixel_color.z);
 
         Interval intensity = new Interval(0.000,0.999);
         int rbyte = (int) (256*intensity.Clamp(r)); // the 255.999 is used instead of 

@@ -7,8 +7,8 @@ public class Sphere: IHittable
     private  Point3 center {get;}
     private  double radius {get;}
 
-    private Material mat;
-    public Sphere(Point3 center, double radius, Material mat)
+    private IMaterial mat;
+    public Sphere(Point3 center, double radius, IMaterial mat)
     {   
         this.mat = mat;
         this.center = center;

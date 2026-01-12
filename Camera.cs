@@ -47,8 +47,8 @@ public class Camera
     {
         var offset = sample_square();
         var pixel_sample = pixel00_loc 
-                            + ((i+offset[0]) * pixel_delta_u)
-                            + ((j+offset[1]) * pixel_delta_v);
+                            + ((i+offset.x) * pixel_delta_u)
+                            + ((j+offset.y) * pixel_delta_v);
         var RayOrigin = camera_center;
         var RayDirection = pixel_sample - RayOrigin;
 
@@ -94,7 +94,7 @@ public class Camera
         }
 
         Vec3 unit_dir= r.Direction.unit_vector();
-        var a = 0.5*(unit_dir[1]+1.0);
+        var a = 0.5*(unit_dir.y+1.0);
         return (1.0-a)*new Color(1.0,1.0,1.0) + a*new Color(0.5,0.7,1.0);
 
     }

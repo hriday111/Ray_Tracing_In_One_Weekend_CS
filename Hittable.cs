@@ -5,7 +5,7 @@ public struct HitRecord
 {
     public Point3 P;
     public Vec3 Normal;
-    public Material mat;
+    public IMaterial mat;
     public double T; // t is the distance from ray origin
 
 

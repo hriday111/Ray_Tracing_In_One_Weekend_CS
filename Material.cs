@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using Color = Vec3;
 using Point3 = Vec3;
-public abstract class Material
+public interface IMaterial
 {
     public virtual bool scatter(in Ray r_in, in HitRecord rec, out Color attenuation, out Ray scattered)
     {
@@ -11,13 +11,13 @@ public abstract class Material
     }
 };
 
-public class Lambertian : Material
+public class Lambertian : IMaterial
 {
     private Color albedo= new Color();
 
     public Lambertian(in Color a) { albedo = a;}
 
-    public override bool scatter(in Ray r_in, in HitRecord rec, out Color attenuation, out Ray scattered)
+    public  bool scatter(in Ray r_in, in HitRecord rec, out Color attenuation, out Ray scattered)
     {
         attenuation = albedo;
         var scatter_direction = rec.Normal + attenuation.RandomUnitVector();
@@ -28,13 +28,13 @@ public class Lambertian : Material
 }
 
 
-public class Metal: Material
+public class Metal: IMaterial
 {
     private Color albedo= new Color();
     private double fuzz;
     public Metal(in Color a, double fuzz) { albedo = a; this.fuzz = fuzz;}
 
-    public override bool scatter(in Ray r_in, in HitRecord rec, out Color attenuation, out Ray scattered)
+    public bool scatter(in Ray r_in, in HitRecord rec, out Color attenuation, out Ray scattered)
     {
         Vec3 reflected = r_in.Direction.reflect(rec.Normal);
         reflected = reflected.unit_vector() + (fuzz* albedo.RandomUnitVector());
@@ -45,7 +45,7 @@ public class Metal: Material
 }
 
 
-public class Dielectric: Material
+public class Dielectric: IMaterial
 {
     double refraction_index;
     static double reflectance(double cos, double ri)
@@ -57,7 +57,7 @@ public class Dielectric: Material
 
     
     public Dielectric(double ref_idx) { refraction_index = ref_idx;}
-    public override bool scatter(in Ray r_in, in HitRecord rec, out Color attenuation, out Ray scattered)
+    public bool scatter(in Ray r_in, in HitRecord rec, out Color attenuation, out Ray scattered)
     {
         attenuation = new Color(1,1,1);
         double ri = rec.FrontFace? (1/refraction_index) : refraction_index;
