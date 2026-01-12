@@ -1,8 +1,10 @@
 
-
 using Point3 = Vec3;
 using Color = Vec3;
 using System.ComponentModel;
+/// <summary>
+/// A ray defined by an origin and a direction.
+/// </summary>
 public class Ray
 {
     public Point3 Origin {get;}

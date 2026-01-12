@@ -1,7 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Numerics;
-
+/// <summary>
+/// Utility methods for color processing and output.
+/// </summary>
 public static class ColorUtils
 {
     
@@ -27,4 +29,5 @@ public static class ColorUtils
         return 0;
     }
 }
+
 

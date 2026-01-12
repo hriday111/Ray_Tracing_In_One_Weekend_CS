@@ -4,7 +4,9 @@ using System.Runtime.CompilerServices;
 using System.Dynamic;
 using System.Numerics;
 using Point3 = Vec3;
-
+///<summary>
+/// A 3D vector class representing points or colors in 3D space.
+/// </summary>
 public struct Vec3
 {
     double[] e=new double[3];

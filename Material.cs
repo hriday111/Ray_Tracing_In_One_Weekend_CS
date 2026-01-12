@@ -1,6 +1,9 @@
 using System.ComponentModel;
 using Color = Vec3;
 using Point3 = Vec3;
+/// <summary>
+/// Material interface and implementations for different surface types.
+/// </summary>
 public interface IMaterial
 {
     public virtual bool scatter(in Ray r_in, in HitRecord rec, out Color attenuation, out Ray scattered)

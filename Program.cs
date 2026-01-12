@@ -1,8 +1,12 @@
-﻿using System.IO;
+﻿
+using System.IO;
 using System.Numerics;
 using System.Reflection.Metadata;
 using Color = Vec3;
 using Point3 = Vec3;
+/// <summary>
+/// Main program to set up the scene and render the image.
+/// </summary>
 public static class Program
 {
 

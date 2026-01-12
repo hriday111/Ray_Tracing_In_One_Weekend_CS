@@ -1,6 +1,9 @@
 using System;
 using System.Runtime.CompilerServices;
 
+/// <summary>
+/// Helper functions and constants for ray tracing.
+/// </summary>
 public static class RTHelpers
 {
     public const double Infinity = double.PositiveInfinity;

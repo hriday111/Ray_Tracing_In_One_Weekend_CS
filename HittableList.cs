@@ -1,10 +1,14 @@
 
+
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Point3 = Vec3;
 using Color = Vec3;
 using System.ComponentModel;
 using System.Reflection.Metadata;
+/// <summary>
+/// A list of hittable objects in the scene.
+/// </summary>
 public class HittableList : IHittable
 {
     public List<IHittable> Objects {get; private set;} = new List<IHittable>();

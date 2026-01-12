@@ -1,6 +1,8 @@
 using Point3 = Vec3;
 using Color = Vec3;
-
+/// <summary>
+/// Record of a ray-object hit.
+/// </summary>
 public struct HitRecord
 {
     public Point3 P;

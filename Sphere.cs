@@ -2,6 +2,9 @@ using System;
 using Point3 = Vec3;
 using Color = Vec3;
 
+/// <summary>
+/// A sphere defined by its center, radius, and material.
+/// </summary>
 public class Sphere: IHittable
 {
     private  Point3 center {get;}

@@ -1,6 +1,8 @@
 using System;
 using System.Runtime.CompilerServices;
-
+/// <summary>
+/// A closed interval [Min, Max] with utility methods.
+/// </summary>
 public readonly struct Interval
 {
     public double Min {get;}

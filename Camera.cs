@@ -3,6 +3,9 @@ using System.Diagnostics;
 using System.Drawing;
 using Color = Vec3;
 using Point3 = Vec3;
+/// <summary>
+/// A simple camera model for rendering the scene.
+/// </summary>
 public class Camera
 {   
 
