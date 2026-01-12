@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Dynamic;
 using System.Numerics;
 using Point3 = Vec3;
+
 public struct Vec3
 {
     double[] e=new double[3];
